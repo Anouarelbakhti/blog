@@ -1,1 +1,1 @@
-alert('dinmmok');
+// alle javascript

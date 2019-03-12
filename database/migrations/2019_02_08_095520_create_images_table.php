@@ -17,15 +17,14 @@ class CreateImagesTable extends Migration
             $table->increments('id');
             $table->integer('page_id')->index();
             $table->string('title')->nullable();
-            $table->string('filename');
-            $table->string('extention');
             $table->string('author')->nullable();
-            $table->integer('width')->nullable()->default(0);
-            $table->integer('height')->nullable()->default(0);
-            $table->integer('file_size')->nullable()->default(0);
+            $table->string('filename');
+            $table->string('extension');
+            $table->integer('width')->default(0)->nullable();
+            $table->integer('height')->default(0)->nullable();
+            $table->integer('filesize')->default(0)->nullable();
             $table->boolean('tiny')->default(0);
             $table->integer('drag_order')->default(0)->index();
-
             $table->timestamps();
         });
     }

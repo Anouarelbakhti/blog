@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Page;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Page;
-use Exception;
-use DB;
 
 class PageController extends Controller
 {
@@ -17,8 +15,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        $pages = Page::get();
-
+        $pages = Page::all();
         return view('admin.pages.index')
             ->with('pages', $pages);
     }
@@ -31,6 +28,7 @@ class PageController extends Controller
     public function create()
     {
         return view('admin.pages.create');
+
     }
 
     /**
@@ -41,27 +39,7 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            DB::beginTransaction();
-
-            $page = new Page;
-            $page->title = $request->title;
-            $page->slug = $request->slug;
-            $page->active = ($request->active) ? 1 : 0;
-            $page->body = $request->body;
-            $page->save();
-
-            DB::commit();
-
-
-            return redirect()->route('admin.pages.index');
-        }
-        catch(Exception $e) {
-
-            DB::rollback();
-            dd($e->getMessage());
-
-        }
+        //
     }
 
     /**
@@ -95,15 +73,7 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
-            DB::beginTransaction();
-
-            DB::commit();
-        }
-        catch(Exception $e) {
-            DB::rollback();
-
-        }
+        //
     }
 
     /**
@@ -114,15 +84,6 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            DB::beginTransaction();
-
-            DB::commit();
-        }
-        catch(Exception $e) {
-            DB::rollback();
-
-        }
+        //
     }
 }
-
